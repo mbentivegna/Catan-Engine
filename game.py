@@ -71,6 +71,8 @@ class Game:
                                     vertex, self.players[current_player_index]
                                 )
                                 self.game_phase = GamePhase.SETTLEMENT_1.value
+                            # Redraw settleable vertices
+                            self.board.redraw_settleable_vertices()
                             edge = self.board.check_if_edge_collision(
                                 mouse_pos,
                                 self.players[current_player_index],
@@ -95,6 +97,7 @@ class Game:
                             self.computer_settlement_phase(
                                 self.players[current_player_index]
                             )
+                            self.board.redraw_settleable_vertices()
                             number_of_turns += 1
                             if number_of_turns > 7:
                                 self.game_phase = GamePhase.NON_SETTLEMENT.value

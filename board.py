@@ -123,7 +123,6 @@ class Board:
         # For showing vertices
         font = pygame.font.Font(None, 24)
         for vertex in self.get_list_of_settleable_vertices():
-            self.screen.blit(text_surface, text_rect.topleft)
             pygame.draw.circle(self.screen, Color.VERTEX.to_rgb(), vertex.coordinate, 5)
 
         pygame.display.flip()
@@ -257,3 +256,15 @@ class Board:
                 list_of_edges.append(edge)
 
         return list_of_edges
+
+    def redraw_settleable_vertices(self) -> None:
+        for vertex in self.vertices:
+            if not vertex.settlement:
+                pygame.draw.circle(
+                    self.screen, Color.EDGE.to_rgb(), vertex.coordinate, 5
+                )
+
+        for vertex in self.get_list_of_settleable_vertices():
+            pygame.draw.circle(self.screen, Color.VERTEX.to_rgb(), vertex.coordinate, 5)
+
+        pygame.display.flip()
